@@ -1,0 +1,234 @@
+on load:
+    set {create_classic} to chest inventory with 2 rows named "&d<Classic Crate>"
+    set {_sword} to diamond sword
+    enchant {_sword} with sharpness 1
+    enchant {_sword} with unbreaking 2
+
+
+command /giveclassickey [<player>] [<number>]:
+    permission: admin.givekey
+    trigger:
+        if arg-1 is set:
+            set {_target} to arg-1
+        else:
+            set {_target} to player
+        if arg-2 is set:
+            set {_amount} to arg-2
+        else:
+            set {_amount} to 1
+        add {_amount} to {keys::%{_target}%::classic}
+        send "&aDu hast %{_amount}% Classic Key(s) erhalten!" to {_target}
+
+
+command /mykeys:
+    trigger:
+        send "&bDu hast %{keys::%player%::classic}% Classic Key(s)!" to player
+
+
+command /givecrateshulker [<player>]:
+    permission: admin.givecrateshulker
+    trigger:
+        if arg-1 is set:
+            set {_target} to arg-1
+        else:
+            set {_target} to player
+        set {_shulker} to light_blue_shulker_box named "&bClassic Crate"
+        give {_shulker} to {_target}
+        send "&aDu hast eine &bClassic Crate &aShulker erhalten!" to {_target}
+
+
+on join:
+    if {keys::%player%::classic} is not set:
+        set {keys::%player%::classic} to 0
+
+
+on left click on light blue shulker box:
+    if name of clicked block is "&bClassic Crate":
+        cancel event
+        if {keys::%player%::classic} > 0:
+            remove 1 from {keys::%player%::classic}
+            play sound "entity.player.levelup" with volume 100 and pitch 100 to player
+
+            set {_sword} to diamond sword
+            enchant {_sword} with sharpness 1
+            enchant {_sword} with unbreaking 2
+            set slot 0 of {create_classic} to {_sword}
+
+            set {_pickaxe} to diamond pickaxe
+            enchant {_pickaxe} with efficiency 1
+            enchant {_pickaxe} with unbreaking 2
+            set slot 1 of {create_classic} to {_pickaxe}
+
+            set {_helmet} to diamond helmet
+            enchant {_helmet} with protection 1
+            enchant {_helmet} with unbreaking 2
+            set slot 2 of {create_classic} to {_helmet}
+
+            set {_chestplate} to diamond chestplate
+            enchant {_chestplate} with protection 1
+            enchant {_chestplate} with unbreaking 2
+            set slot 3 of {create_classic} to {_chestplate}
+
+            set {_leggings} to diamond leggings
+            enchant {_leggings} with protection 1
+            enchant {_leggings} with unbreaking 2
+            set slot 4 of {create_classic} to {_leggings}
+
+            set {_boots} to diamond boots
+            enchant {_boots} with protection 1
+            enchant {_boots} with unbreaking 2
+            set slot 5 of {create_classic} to {_boots}
+
+            set {endcrystal} to end_crystal
+            set amount of {endcrystal} to 64
+            set slot 6 of {create_classic} to {endcrystal}
+
+            set {obsidian} to obsidian
+            set amount of {obsidian} to 64
+            set slot 7 of {create_classic} to {obsidian}
+
+            set {respawnanch} to respawn anchor
+            set amount of {respawnanch} to 64
+            set slot 8 of {create_classic} to {respawnanch}
+
+            set {glowstone} to glowstone
+            set amount of {glowstone} to 64
+            set slot 9 of {create_classic} to {glowstone}
+
+            open {create_classic} to player
+            send "&aDu hast deine Classic Crate geöffnet!" to player
+        else:
+            send "&cDu hast keine Keys!" to player
+            play sound "entity.villager.no" with volume 1 and pitch 1 to player
+
+
+on right click on light blue shulker box:
+    if name of clicked block is "&bClassic Crate":
+        cancel event
+        if {keys::%player%::classic} > 0:
+            remove 1 from {keys::%player%::classic}
+            play sound "entity.player.levelup" with volume 100 and pitch 100 to player
+
+            set {_sword} to diamond sword
+            enchant {_sword} with sharpness 1
+            enchant {_sword} with unbreaking 2
+            set slot 0 of {create_classic} to {_sword}
+
+            set {_pickaxe} to diamond pickaxe
+            enchant {_pickaxe} with efficiency 1
+            enchant {_pickaxe} with unbreaking 2
+            set slot 1 of {create_classic} to {_pickaxe}
+
+            set {_helmet} to diamond helmet
+            enchant {_helmet} with protection 1
+            enchant {_helmet} with unbreaking 2
+            set slot 2 of {create_classic} to {_helmet}
+
+            set {_chestplate} to diamond chestplate
+            enchant {_chestplate} with protection 1
+            enchant {_chestplate} with unbreaking 2
+            set slot 3 of {create_classic} to {_chestplate}
+
+            set {_leggings} to diamond leggings
+            enchant {_leggings} with protection 1
+            enchant {_leggings} with unbreaking 2
+            set slot 4 of {create_classic} to {_leggings}
+
+            set {_boots} to diamond boots
+            enchant {_boots} with protection 1
+            enchant {_boots} with unbreaking 2
+            set slot 5 of {create_classic} to {_boots}
+
+            set {endcrystal} to end_crystal
+            set amount of {endcrystal} to 64
+            set slot 6 of {create_classic} to {endcrystal}
+
+            set {obsidian} to obsidian
+            set amount of {obsidian} to 64
+            set slot 7 of {create_classic} to {obsidian}
+
+            set {respawnanch} to respawn anchor
+            set amount of {respawnanch} to 64
+            set slot 8 of {create_classic} to {respawnanch}
+
+            set {glowstone} to glowstone
+            set amount of {glowstone} to 64
+            set slot 9 of {create_classic} to {glowstone}
+
+            open {create_classic} to player
+            send "&aDu hast deine Classic Crate geöffnet!" to player
+        else:
+            send "&cDu hast keine Keys!" to player
+            play sound "entity.villager.no" with volume 1 and pitch 1 to player
+
+
+on inventory click:
+    if name of event-inventory is "&d<Classic Crate>":
+        if clicked slot is 0:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 1:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 2:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 3:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 4:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 5:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 6:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 7:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 8:
+            wait 0.000001 seconds
+            close inventory of player
+        if clicked slot is 9:
+            wait 0.000001 seconds
+            close inventory of player
+
+
+command /keys:
+    trigger:
+        if {keys::%player%::classic} is not set:
+            set {keys::%player%::classic} to 0
+        send "&bDu hast %{keys::%player%::classic}% Classic Key(s)!" to player
+
+
+command /deleteclassiccrates:
+    permission: admin.deletecrates
+    trigger:
+        set {_count} to 0
+        loop blocks in chunk at player:
+            if loop-block is light_blue_shulker_box:
+                if name of loop-block is "&bClassic Crate":
+                    set block at loop-block to air
+                    add 1 to {_count}
+        send "&aEs wurden %{_count}% Classic Crate Shulker in diesem Chunk entfernt!" to player
+
+
+on join:
+    wait 72000 ticks # 1 Stunde
+    add 1 to {keys::%player%::classic}
+    send "&aDu hasst einen clasic key erhalten /creates um zu öffnen" to player
+
+
+command /keyallclassic [<number>]:
+    permission: admin.keyall
+    trigger:
+        if arg-1 is not set:
+            set {_amount} to 1
+        else:
+            set {_amount} to arg-1
+        loop all players:
+            add {_amount} to {keys::%loop-player%::classic}
+            send "&aDu hast %{_amount}% Classic Key(s) vom Admin erhalten!" to loop-player
+        broadcast "&bAlle Spieler haben %{_amount}% Classic Key(s) erhalten!"
